@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
-import Navbar from "../components/layout/Navbar";
+import Navbar from "../components/layout/navbar";
 import { getUserGameState, getUserBetHistory } from "../utils/gameStorage";
 
 const Admin = () => {

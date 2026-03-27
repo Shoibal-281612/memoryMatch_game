@@ -6,7 +6,7 @@ import { useGame } from '../hooks/useGame';
 import BetControls from '../components/Game/betControls';
 import GameBoard from '../components/Game/gameBoard';
 import WalletPanel from '../components/Wallet/walletPannel';
-import Navbar from '../components/layout/Navbar';
+import Navbar from '../components/layout/navbar';
 
 const Game = () => {
   const { currentUser, deduct, addWinnings, addMoney } = useAuth();
