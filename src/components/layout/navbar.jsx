@@ -1,7 +1,7 @@
 // src/components/layout/Navbar.jsx
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
@@ -9,7 +9,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate('/');
   };
 
   return (
@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Game Name */}
-          <Link to="/game" className="flex items-center space-x-2 group">
+          <Link to="/" className="flex items-center space-x-2 group">
             <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-black font-bold text-xl group-hover:scale-110 transition-transform">
               🎮
             </div>
@@ -29,25 +29,50 @@ const Navbar = () => {
           {/* Navigation Links */}
           <div className="flex items-center space-x-4">
             <Link
-              to="/game"
+              to="/"
               className="text-gray-300 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
-              Game
+              Home
             </Link>
-            {currentUser?.role === "admin" && (
-              <Link
-                to="/admin"
-                className="text-gray-300 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                Admin Panel
-              </Link>
+            {currentUser ? (
+              <>
+                <Link
+                  to="/game"
+                  className="text-gray-300 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Game
+                </Link>
+                {currentUser.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className="text-gray-300 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    Admin
+                  </Link>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-gray-300 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Sign Up
+                </Link>
+              </>
             )}
-            <button
-              onClick={handleLogout}
-              className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
-            >
-              Logout
-            </button>
           </div>
         </div>
       </div>
